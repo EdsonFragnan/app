@@ -22,11 +22,8 @@ const options = {
 };
 
 rotas.readDir(dir, function(data) {
-    console.log('AQUIIIIIIIIII: ', data);
+   server.route(data);
 });
-/*for (var rota in rotas.rotas()) {
-  server.route(rotas[rota]);
-}*/
 
 server.register([
   Inert,

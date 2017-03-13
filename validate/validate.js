@@ -5,15 +5,11 @@ const links = [];
 
 module.exports = {
   validateFiles: (file, dir, callback) => {
-    for(var i in file){
-      var dirFile = file[i];
-    };
+    var files = fs.readdirSync(dir);
     file.map((files) => {
-      var diretorio = path.join(dirFile, dir);
-      var config = [__dirname, '/api', '/', file, '/config.js'].join('').replace('rotas/', '').replace('validate/', '');
-      console.log(config);
-      var validate = [__dirname, '/api', '/', file, '/validate.js'].join('').replace('rotas/', '').replace('validate/', '');;
-      var controller = [__dirname, '/api', '/', file, '/controller.js'].join('').replace('rotas/', '').replace('validate/', '');;
+      var config = [__dirname, '/api', '/', files, '/config.js'].join('').replace('rotas/', '').replace('validate/', '');
+      var validate = [__dirname, '/api', '/', files, '/validate.js'].join('').replace('rotas/', '').replace('validate/', '');
+      var controller = [__dirname, '/api', '/', files, '/controller.js'].join('').replace('rotas/', '').replace('validate/', '');
       if (!fs.existsSync(config)) {
         throw new Error('Arquivo config.js não encontrado ' + dir + '/' + file);
       } else if (!fs.existsSync(validate)) {
@@ -21,13 +17,18 @@ module.exports = {
       } else if (!fs.existsSync(controller)) {
         throw new Error('Arquivo controller.js não encontrado' + dir + '/' + file);
       } else {
-        links.push([
-          config,
-          validate,
-          controller
-        ]);
+        var Config = require(config);
+        var configImpl = new Config();
+        var Validate = require(validate);
+        var validateImpl = new Validate();
+        var endpoint = {
+          config: configImpl,
+          validate: validateImpl
+        };
       }
-      callback(links);
+      var endpoints = [];
+      endpoints.push(endpoint);
+      callback(endpoints);
     });
   }
 };

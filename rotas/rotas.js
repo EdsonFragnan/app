@@ -1,15 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const validate = require('../validate/validate.js');
-/*unction readDir(callback) {
-  fs.readdir(dir, (err, files) => {
-      if (err) {
-        throw err;
-      }
-      console.log(files);
-      return files;
-  });
-}*/
 
 module.exports = {
   readDir: (dir, callback) => {
@@ -19,48 +10,22 @@ module.exports = {
           throw err;
         }
         validate.validateFiles(file, dir, function(response) {
-          callback(response);
+          for(var i in response) {
+            var resp = response[i];
+            var endpoint = {
+              method: resp.config.method,
+              path: resp.config.path,
+              config: {
+                handler: resp.config.handler,
+                description: resp.config.description,
+                notes: resp.config.notes,
+                tags: resp.config.tags,
+                validate: resp.validate.validate
+              }
+            };
+          }
+          callback(endpoint);
         });
     });
   }
 };
-/*
-const rotas = () => {
-  var teste = readDir;
-  console.log('Teste: ', teste);
-};
-
-const readDir =
-
-
-rotas();
-
-*/
-
-  /*fs.readdir(dir, (err, files) => {
-    if (err) {
-      throw err;
-    }
-    return files;
-    //var response = validate.validateFiles(files);
-    //console.log('Validate: ', validate.validateFiles(files));
-  });*/
-
-
-/*module.exports = {
-  rotas: () => {
-    var teste = readDir((data, callback) => {
-      console.log('AQUI');
-    });
-    return teste;
-  }
-};
-
-const readDir = () => {
-  callback(fs.readdir(dir, (err, files) => {
-    if (err) {
-      throw err;
-    }
-    console.log(files);
-  });
-}*/
