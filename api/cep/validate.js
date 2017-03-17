@@ -1,12 +1,14 @@
-module.exports = ValidateImpl;
+const Joi = require('joi');
 
-function ValidateImpl(res) {
-  res = {
-    validate: {
-      params: {
-        cep : ''
+module.exports = {
+  validate: () => {
+    res = {
+      validate: {
+        query: {
+          cep : Joi.string().description('Insira o CEP.')
+        }
       }
     }
+    return res;
   }
-  return res;
 }

@@ -1,37 +1,34 @@
 'use strict';
 
-module.exports = controllerImpl;
 const http = require('http');
 const Boom = require('boom');
 
-function controllerImpl(res) {
-  res = 'Sucesso';
-  return res;
-}
+module.exports.buscacep = (req, res) => {
+    try {
+      const options = {
+        host: 'viacep.com.br',
+        path: '/ws/' + req.query.cep + '/json/'
+      };
 
-/*exports.buscacep = function(req, res) {
-  try {
-    const options = {
-      host: 'viacep.com.br',
-      path: '/ws/' + req.query.cep + '/json/'
-    };
+      const callback = (response) => {
+        var resp = '';
+        response.on('data', (data) => {
+          resp += data;
+        });
 
-    const callback = function(response) {
-      var retorno = '';
-      response.on('data', function (data) {
-        console.log(data);
-        retorno += data;
-      }).on('end', function (err) {
-        err = /400/;
-        if (err.test(retorno)) {
-          res(Boom.badRequest(400, 'CEP não encontrado.'))
-        } else {
-          res(retorno);
-        }
-      });
+        response.on('end', () => {
+          if (JSON.parse(resp).erro === true) {
+            res(Boom.badRequest('CEP não encontrado.'));
+          } else {
+            res(resp);
+          }
+        });
+      }
+
+      req = http.request(options, callback);
+      req.end();
+
+    } catch (e) {
+      res(Boom.serverUnavailable('Erro Interno no servidor.'))
     }
-    var req = http.request(options, callback).end();
-  } catch (e) {
-    res(Boom.serverUnavailable('Erro Interno no servidor.'))
-  }
-}*/
+}

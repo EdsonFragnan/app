@@ -17,13 +17,11 @@ module.exports = {
       } else if (!fs.existsSync(controller)) {
         throw new Error('Arquivo controller.js não encontrado' + dir + '/' + file);
       } else {
-        var Config = require(config);
-        var configImpl = new Config();
-        var Validate = require(validate);
-        var validateImpl = new Validate();
+        var config = require(config);
+        var validate = require(validate);
         var endpoint = {
-          config: configImpl,
-          validate: validateImpl
+          config: config.config(),
+          validate: validate.validate()
         };
       }
       var endpoints = [];
