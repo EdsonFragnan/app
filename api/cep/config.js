@@ -1,14 +1,11 @@
 var controller = require('./controller');
-module.exports = {
-  config: () => {
-    res = {
-      method: "GET",
-      path: "/apiCep",
-      handler: controller.buscacep,
-      description: 'Busca CEP.',
-      notes: 'Busca CEP.',
-      tags: ['api']
-    }
-    return res;
+module.exports.config = {
+  method: "GET",
+  path: "/apiCep",
+  config: {
+    handler: controller.buscacep,
+    description: 'Busca CEP.',
+    notes: 'Busca CEP.',
+    tags: ['api']
   }
 }

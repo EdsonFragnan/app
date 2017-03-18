@@ -20,8 +20,8 @@ module.exports = {
         var config = require(config);
         var validate = require(validate);
         var endpoint = {
-          config: config.config(),
-          validate: validate.validate()
+          config: config,
+          validate: validate
         };
       }
       var endpoints = [];

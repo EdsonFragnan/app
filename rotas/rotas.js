@@ -10,21 +10,15 @@ module.exports = {
           throw err;
         }
         validate.validateFiles(file, dir, function(response) {
-          for(var i in response) {
-            var resp = response[i];
-            var endpoint = {
-              method: resp.config.method,
-              path: resp.config.path,
-              config: {
-                handler: resp.config.handler,
-                description: resp.config.description,
-                notes: resp.config.notes,
-                tags: resp.config.tags,
-                validate: resp.validate.validate
+          response.map((resp) => {
+              const respConstruct = Object.assign(resp.config.config.config, resp.validate.validate);
+              const objeto = {
+                method: resp.config.config.method,
+                path: resp.config.config.path,
+                config: respConstruct
               }
-            };
-          }
-          callback(endpoint);
+              callback(objeto);
+          });
         });
     });
   }
