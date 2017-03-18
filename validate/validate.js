@@ -5,7 +5,7 @@ const links = [];
 
 module.exports = {
   validateFiles: (file, dir, callback) => {
-    var files = fs.readdirSync(dir);
+    const files = fs.readdirSync(dir);
     file.map((files) => {
       var config = [__dirname, '/api', '/', files, '/config.js'].join('').replace('rotas/', '').replace('validate/', '');
       var validate = [__dirname, '/api', '/', files, '/validate.js'].join('').replace('rotas/', '').replace('validate/', '');
