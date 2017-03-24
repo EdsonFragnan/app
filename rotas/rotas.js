@@ -4,7 +4,7 @@ const validate = require('../validate/validate.js');
 
 module.exports = {
   readDir: (dir, callback) => {
-    var links = [];
+    const links = [];
     fs.readdir(dir, (err, file) => {
         if (err) {
           throw err;

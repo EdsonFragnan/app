@@ -3,6 +3,8 @@
 const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
+const Log = require('log'),
+      log = new Log('info');
 const HapiSwagger = require('hapi-swagger');
 const rotas = require('./rotas/rotas.js');
 const Pack = require('./package');
@@ -22,6 +24,7 @@ const options = {
 };
 
 rotas.readDir(dir, function(data) {
+   log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'estão onlines.');
    server.route(data);
 });
 
