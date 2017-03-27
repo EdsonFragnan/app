@@ -19,7 +19,7 @@ module.exports = {
       } else {
         const configReq = require(config);
         const validateReq = require(validate);
-        const endpoint = {
+        var endpoint = {
           config: configReq,
           validate: validateReq
         };
