@@ -24,7 +24,7 @@ const options = {
 };
 
 rotas.readDir(dir, function(data) {
-   log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'estão onlines.');
+   log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'online.');
    server.route(data);
 });
 

@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const dir = './api';
-const links = [];
 
 module.exports = {
   validateFiles: (file, dir, callback) => {
@@ -19,7 +18,7 @@ module.exports = {
       } else {
         const configReq = require(config);
         const validateReq = require(validate);
-        const endpoint = {
+        var endpoint = {
           config: configReq,
           validate: validateReq
         };
