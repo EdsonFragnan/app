@@ -5,6 +5,7 @@ const Inert = require('inert');
 const Vision = require('vision');
 const Log = require('log'),
       log = new Log('info');
+const colors = require('colors');
 const HapiSwagger = require('hapi-swagger');
 const rotas = require('./rotas/rotas.js');
 const Pack = require('./package');
@@ -24,7 +25,7 @@ const options = {
 };
 
 rotas.readDir(dir, function(data) {
-   log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'online.');
+   log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'online.'.green);
    server.route(data);
 });
 
@@ -40,7 +41,7 @@ server.register([
     if (err) {
       throw err;
     } else {
-      console.log('Server rodando na porta: 8080');
+      console.log('Server rodando na porta: 8080'.green);
     }
   });
 });

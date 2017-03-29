@@ -17,8 +17,18 @@
   },
   "homepage": "https://github.com/EdsonFragnan/app#readme",
   "dependencies": {
+    "async": "^2.2.0",
+    "color-logs": "^0.6.1",
+    "colors": "^1.1.2",
+    "colors.js": "^1.2.4",
+    "debug": "^2.6.3",
     "easyxml": "^2.0.1",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
+    "hoek": "^4.1.0",
+    "jshint": "^2.9.4",
     "jwt-simple": "^0.5.1",
-    "log": "^1.4.0"
+    "log": "^1.4.0",
+    "vision": "^4.1.1"
   }
 }
