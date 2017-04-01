@@ -1,6 +1,6 @@
 # Aplicação
 Aplicação que gera rotas dinâmicas.
-# Observação
+# Observações
 - Não se preocupe com o core.
 - Se você só está desejando desenvolver suas apis, apenas siga os passos.
 - Dentro da pasta api, é o local onde serão criadas as rotas.
