@@ -1,11 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+'use strict';
+
+const bibliotecas = require('./../config/configHapi')();
 const validate = require('../validate/validate.js');
 
 module.exports = {
   readDir: (dir, callback) => {
     const links = [];
-    fs.readdir(dir, (err, file) => {
+    bibliotecas.fs.readdir(dir, (err, file) => {
         if (err) {
           throw err;
         }

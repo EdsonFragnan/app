@@ -1,2 +1,3 @@
 # app
-APP que gera rotas dinâmicas.
+
+Aplicação que gera rotas dinâmicas.

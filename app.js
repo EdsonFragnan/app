@@ -1,43 +1,26 @@
 'use strict';
 
-const Hapi = require('hapi');
-const Inert = require('inert');
-const Vision = require('vision');
-const Log = require('log'),
-      log = new Log('info');
-const colors = require('colors');
-const HapiSwagger = require('hapi-swagger');
-const rotas = require('./rotas/rotas.js');
-const Pack = require('./package');
-const dir = './api';
+const bibliotecas = require('./config/configHapi')();
 
-const server = new Hapi.Server();
-server.connection({
+bibliotecas.server.connection({
   host: 'localhost',
   port: 8080
 });
 
-const options = {
-  info: {
-    'title': 'Documentação APP',
-    'version': Pack.version
-  }
-};
-
-rotas.readDir(dir, function(data) {
-   log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'online.'.green);
-   server.route(data);
+bibliotecas.rotas.readDir(bibliotecas.dir, function(data) {
+   bibliotecas.log.info('API - ' + data.path + ' - ' + data.method + ' - ' + 'online.'.green);
+   bibliotecas.server.route(data);
 });
 
-server.register([
-  Inert,
-  Vision,
+bibliotecas.server.register([
+  bibliotecas.Inert,
+  bibliotecas.Vision,
   {
-    'register': HapiSwagger,
-    'options': options
+    'register': bibliotecas.HapiSwagger,
+    'options': bibliotecas.options
   }
 ], (err) => {
-  server.start((err) => {
+  bibliotecas.server.start((err) => {
     if (err) {
       throw err;
     } else {
