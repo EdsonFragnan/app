@@ -1,5 +1,7 @@
-const connect = require('./conexao');
+"use strict";
 
+const connect = require('./conexao');
+const operations = require('./operacoes');
 const access = (callback) => {
   connect.connection((err, data) => {
     if (err) {
@@ -12,11 +14,12 @@ const access = (callback) => {
 
 module.exports = {
   insertOne: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').insert(request, (err, data) => {
+        operations.execInsertOne(db, objDAO.insertOne(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -28,11 +31,12 @@ module.exports = {
   },
 
   insertMany: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').insertMany(request, (err, data) => {
+        operations.execInsertMany(db, objDAO.insertMany(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -44,11 +48,12 @@ module.exports = {
   },
 
   updateOne: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').updateOne(request, (err, data) => {
+        operations.execUpdateOne(db, objDAO.updateOne(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -60,11 +65,12 @@ module.exports = {
   },
 
   updateMany: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').updateMany(request, (err, data) => {
+        operations.execUpdateMany(db, objDAO.updateMany(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -76,11 +82,12 @@ module.exports = {
   },
 
   deleteOne: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').deleteOne(request, (err, data) => {
+        operations.execDeleteOne(db, objDAO.deleteOne(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -92,11 +99,12 @@ module.exports = {
   },
 
   deleteMany: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').deleteMany(request, (err, data) => {
+        operations.execDeleteMany(db, objDAO.deleteMany(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -108,11 +116,12 @@ module.exports = {
   },
 
   findOne: (request, callback) => {
+    const objDAO = new Cliente(request);
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        db.collection('cliente').findOne(request, (err, data) => {
+        operations.execFindOne(db, objDAO.findOne(), (err, data) => {
           if (err) {
             callback(err, null);
           } else {
@@ -128,9 +137,61 @@ module.exports = {
       if (err) {
         callback(err, null);
       } else {
-        const items = db.collection('cliente').find().toArray();
-        callback(null, items);
+        operations.execFind(db, (err, data) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, data);
+          }
+        });
       }
     });
   }
 };
+
+class Cliente {
+  constructor(request) {
+    this.nome = request.nome;
+    this.sobrenome = request.sobrenome;
+    this.cpf = request.cpf;
+    this.rg = request.rg;
+    this.estado_civil = request.estado_civil;
+    this.email = request.email;
+    this.logradouro = request.logradouro;
+    this.complemento = request.complemento;
+    this.bairro = request.bairro;
+    this.localidade = request.localidade;
+    this.uf = request.uf;
+    this.cep = request.cep;
+  }
+
+  insertOne() {
+    return this;
+  }
+  insertMany() {
+    return;
+  }
+  updateOne() {
+    return this;
+  }
+  updateMany() {
+    return;
+  }
+  deleteOne() {
+    return {
+      'cpf': this.cpf
+    };
+  }
+  deleteMany() {
+    return;
+  }
+  findOne() {
+    return {
+      'cpf': this.cpf
+    };
+  }
+  find() {
+    return this;
+  }
+
+}
