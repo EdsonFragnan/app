@@ -1,9 +1,9 @@
 const controller = require('./controller');
 module.exports.config = {
   method: "GET",
-  path: "/cliente/encontrar/{cpf?}",
+  path: "/cliente/lista/{cpf?}",
   config: {
-    handler: controller.encontrar,
+    handler: controller.listaCliente,
     description: 'Encontrar cliente pelo cpf.',
     notes: 'Encontrar cliente pelo cpf.',
     tags: ['api', 'cliente']

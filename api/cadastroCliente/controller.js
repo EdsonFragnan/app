@@ -2,7 +2,7 @@
 
 const http = require('http');
 const Boom = require('boom');
-const db = require('../../configDB/metodos.js');
+const db = require('../../metodos/metodos.js');
 
 module.exports.cadastro = (req, res) => {
     try {
@@ -20,7 +20,7 @@ module.exports.cadastro = (req, res) => {
         uf: req.payload.uf,
         cep: req.payload.cep
       };
-      db.insertOne(request, (err, data) => {
+      db.insertOne(request, 'clientes', 'cliente', (err, data) => {
         if (err) {
           res(Boom.badData(err))
         } else {

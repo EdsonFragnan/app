@@ -2,16 +2,16 @@
 
 const http = require('http');
 const Boom = require('boom');
-const db = require('../../configDB/metodos.js');
+const db = require('../../metodos/metodos.js');
 
-module.exports.encontrar = (req, res) => {
+module.exports.listaCliente = (req, res) => {
     try {
-      db.findOne(req.params, (err, data) => {
+      db.findOne(req.params, 'clientes', 'cliente', (err, data) => {
         if (err) {
           res(Boom.badData(err))
         } else {
           if (data === null || data.length === 0) {
-            res(Boom.badData('CPF não encontrado.'));
+            res(Boom.badData('Cliente não encontrado.'));
           } else {
             res(data);
           }

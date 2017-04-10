@@ -2,7 +2,7 @@
 
 const http = require('http');
 const Boom = require('boom');
-const db = require('../../configDB/metodos.js');
+const db = require('../../metodos/metodos.js');
 
 module.exports.alterar = (req, res) => {
     try {
@@ -20,11 +20,11 @@ module.exports.alterar = (req, res) => {
         uf: req.payload.uf,
         cep: req.payload.cep
       };
-      db.updateOne(request, (err, data) => {
+      db.updateOne(request, 'produtos', 'produto', (err, data) => {
         if (err) {
           res(Boom.badData(err))
         } else {
-          res(data.ops);
+          res(data.result);
         }
       });
     } catch (e) {

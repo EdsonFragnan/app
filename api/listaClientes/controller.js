@@ -2,18 +2,22 @@
 
 const http = require('http');
 const Boom = require('boom');
-const db = require('../../configDB/metodos.js');
+const db = require('../../metodos/metodos.js');
 
 module.exports.listarClientes = (req, res) => {
     try {
-      db.find((err, data) => {
+      db.find('clientes', 'cliente', (err, data) => {
+        console.log(data);
         if (err) {
           res(Boom.badData(err))
         } else {
           if (data === null || data.length === 0) {
             res(Boom.badData('Clientes não encontrados.'));
           } else {
-            res(data);
+            const resp = {
+              'clientes': data
+            }
+            res(resp);
           }
         }
       });
