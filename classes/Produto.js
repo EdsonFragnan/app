@@ -29,11 +29,27 @@ class Produto {
       'id_produto': this.id_produto
     };
   }
+  updateOne() {
+    return {
+      'id_produto': this.id_produto,
+      'nome_produto': this.nome_produto,
+      'preco_produto': this.preco_produto,
+      'descricao_produto': this.descricao_produto,
+      'tamanho_memoria': this.tamanho_memoria,
+      'tipo_transmissao': this.tipo_transmissao,
+      'quantidade_produto': this.quantidade_produto,
+      'marca_produto': this.marca_produto,
+      'fabricante_produto': this.fabricante_produto,
+      'data_entrada_produto': this.data_entrada_produto,
+      'imagem_produto': this.imagem_produto
+    };
+  }
   deleteOne() {
     return {
       'id_produto': this.id_produto
     };
   }
+
   find() {
     return this;
   }

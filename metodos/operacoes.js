@@ -20,8 +20,9 @@ module.exports = {
     });
   },
 
-  execUpdateOne: (db, banco, req, callback) => {
-    db.collection(banco).updateOne({cpf:req.cpf}, {$set:req}, (err, data) => {
+  execUpdateOne: (db, banco, objeto, callback) => {
+    const identificador = objeto[Object.keys(objeto)[0]];
+    db.collection(banco).updateOne({id_produto: identificador}, {$set:objeto}, (err, data) => {
       if (err) {
         callback(err, null);
       } else {

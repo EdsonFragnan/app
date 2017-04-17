@@ -11,6 +11,10 @@ module.exports.config = {
     },
     description: 'Cadastro produto.',
     notes: 'Cadastro produto.',
-    tags: ['api', 'produto']
+    tags: ['api', 'produto'],
+    cors: {
+      origin: ['*'],
+      additionalHeaders: ['cache-control', 'x-requested-with']
+    }
   }
 }

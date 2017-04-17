@@ -6,6 +6,10 @@ module.exports.config = {
     handler: controller.alterar,
     description: 'Alterar dados do produto.',
     notes: 'Alterar dados do produto.',
-    tags: ['api', 'produto']
+    tags: ['api', 'produto'],
+    cors: {
+      origin: ['*'],
+      additionalHeaders: ['cache-control', 'x-requested-with']
+    }
   }
 }

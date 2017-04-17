@@ -2,21 +2,19 @@ const Joi = require('joi');
 module.exports.validate = {
   validate: {
     params: {
-      cpf: Joi.number().description('Insira o cpf do cliente.')
+      id_produto: Joi.string().description('Insira o id do produto.')
     },
     payload: {
-      nome: Joi.string().description('Insira seu nome.'),
-      sobrenome: Joi.string().description('Insira seu sobrenome.'),
-      cpf: Joi.number().description('Insira seu CPF.'),
-      rg: Joi.number().description('Insira seu RG.'),
-      estado_civil: Joi.string().description('Insira seu estado civil.'),
-      email: Joi.string().description('Insira seu email.'),
-      logradouro: Joi.string().description('Insira o logradouro.'),
-      complemento: Joi.string().description('Insira o complemento.'),
-      bairro: Joi.string().description('Insira o bairro.'),
-      localidade: Joi.string().description('Insira a localidade.'),
-      uf: Joi.string().description('Insira a uf.'),
-      cep: Joi.string().description('Insira seu CEP.').min(8)
+      nome_produto: Joi.string().description('Insira o nome do produto.'),
+      preco_produto: Joi.string().description('Insira o preço do produto.'),
+      descricao_produto: Joi.string().description('Insira a descrição do produto.'),
+      tamanho_memoria: Joi.string().description('Insira a quantidade de memória.'),
+      tipo_transmissao: Joi.string().description('Insira o tipo de transmissão do aparelho.'),
+      quantidade_produto: Joi.number().description('Insira a quantidade do produto.').min(1),
+      marca_produto: Joi.string().description('Insira a marca do produto.'),
+      fabricante_produto: Joi.string().description('Insira o nome do fabricante do produto.'),
+      data_entrada_produto: Joi.date().description('Insira a data de entrada do produto.'),
+      imagem_produto: Joi.string().description('Insira a imagem do produto.')
     }
   }
 }

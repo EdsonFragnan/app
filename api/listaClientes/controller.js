@@ -7,7 +7,6 @@ const db = require('../../metodos/metodos.js');
 module.exports.listarClientes = (req, res) => {
     try {
       db.find('clientes', 'cliente', (err, data) => {
-        console.log(data);
         if (err) {
           res(Boom.badData(err))
         } else {
